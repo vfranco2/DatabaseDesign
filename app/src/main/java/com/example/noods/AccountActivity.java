@@ -21,23 +21,28 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.noods.MainActivity.ip;
+
 
 public class AccountActivity extends AppCompatActivity {
 
+    //UI things
     Button btnUser1;
     Button btnUser2;
     RequestQueue requestQueue;
-    String userUrl = "http://192.168.1.182/switchUser.php";
+    String userUrl = "http://"+ip+"/switchUser.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
 
+        //assignments for ui/request
         requestQueue = Volley.newRequestQueue(getApplicationContext());
         btnUser1 = (Button) findViewById(R.id.user1);
         btnUser2 = (Button) findViewById(R.id.user2);
 
+        //Switch user request listener, checks for btn input = number, pass number to php, number = loading user inventory
         btnUser1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

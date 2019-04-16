@@ -31,12 +31,17 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
+    //PHP script urls
+    //Yeah yeah it's public, would bother with getter if ip retrieval worked
+    public static String ip = "192.168.1.182";
+    String insertUrl = "http://"+ip+"/insertIngredient.php";
+    String showUrl = "http://"+ip+"/showIngredients.php";
+    String updateUrl = "http://"+ip+"/updateIngredient.php";
+
+    //Instantiate UI elements, POST request
     EditText ingredientName, heldAmt;
     Button insert, show;
     RequestQueue requestQueue;
-    String insertUrl = "http://192.168.1.182/insertIngredient.php";
-    String showUrl = "http://192.168.1.182/showIngredients.php";
-    String updateUrl = "http://192.168.1.182/updateIngredient.php";
 
     private List<Ingredient> ingredients;
     private RecyclerView recyclerView;
@@ -48,11 +53,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Match UI elements to XML
         ingredientName = (EditText) findViewById(R.id.editText);
         heldAmt = (EditText) findViewById(R.id.editText2);
         insert = (Button) findViewById(R.id.insert);
         show = (Button) findViewById(R.id.showstudents);
 
+        //Call getIngredientsFromDB method (POST)
         getIngredientsFromDB(0);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         ingredients = new ArrayList<>();
@@ -62,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         requestQueue = Volley.newRequestQueue(getApplicationContext());
 
+        //Navigate to recipes
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, RecipeActivity.class));
             }
         });
-
+        //Navigate to accounts
         FloatingActionButton fab2 = findViewById(R.id.fab2);
         fab2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //HANDLE INSERT REQUEST CLICKLISTENER
         insert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -105,11 +114,12 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+        //HANDLE INGREDIENT AMOUNTS REQUEST CLICKLISTENER
         adapter.setOnItemClickListener(new IngredientsAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 final int pos = position+101;
-                Toast.makeText(getApplicationContext(), "You clicked " + pos, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Added item at ID: " + pos, Toast.LENGTH_SHORT).show();
                 StringRequest requestUpd = new StringRequest(Request.Method.POST, updateUrl, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -133,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    //HANDLE INGREDIENT REFRESHING REQUEST CLICKLISTENER
     private void getIngredientsFromDB(int id){
         show.setOnClickListener(new View.OnClickListener() {
 
@@ -170,6 +181,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    //Clears current recyclerview array to allow new data to appear at top
     public void clear() {
         final int size = ingredients.size();
         if (size > 0) {
@@ -179,4 +191,6 @@ public class MainActivity extends AppCompatActivity {
             adapter.notifyDataSetChanged();
         }
     }
+
+
 }

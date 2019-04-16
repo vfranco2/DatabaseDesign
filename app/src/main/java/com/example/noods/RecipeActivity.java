@@ -21,12 +21,15 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.noods.MainActivity.ip;
+
 
 public class RecipeActivity extends AppCompatActivity {
 
+    //UI/request things
     Button showRec;
     RequestQueue requestQueue;
-    String showUrl = "http://192.168.1.182/refreshRecipes.php";
+    String showUrl = "http://"+ip+"/refreshRecipes.php";
 
     private List<Recipe> recipes;
     private RecyclerView recyclerViewRecipe;
@@ -46,6 +49,8 @@ public class RecipeActivity extends AppCompatActivity {
         recyclerViewRecipe.setAdapter(adapterRecipe);
         requestQueue = Volley.newRequestQueue(getApplicationContext());
         showRec = (Button) findViewById(R.id.showrecipes);
+
+        //button listener, recipe refresh
         showRec.setOnClickListener(new View.OnClickListener() {
 
             @Override
