@@ -23,6 +23,9 @@ import java.util.Map;
 
 import static com.example.noods.MainActivity.ip;
 
+//----------------------------------------------------
+//Noods by Vlad Franco, Jacob Couveau, and David Michon
+//----------------------------------------------------
 
 public class AccountActivity extends AppCompatActivity {
 

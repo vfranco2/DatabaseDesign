@@ -29,6 +29,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+//----------------------------------------------------
+//Noods by Vlad Franco, Jacob Couveau, and David Michon
+//----------------------------------------------------
+
 public class MainActivity extends AppCompatActivity {
 
     //PHP script urls
