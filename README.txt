@@ -1,4 +1,4 @@
-This is Noods, a ramen noodle recipe database application created by Vlad Franco, Jacob Couveau, and David Michon as part of our database class project. Excuse our choice of using localhost, domains cost money.
+This is Noods, a ramen noodle recipe database application created by Vlad Franco as part of my database class project.
 
 USAGE INSTRUCTIONS
 1) Install XAMPP, only Apache and MySQL need to be selected during install https://www.apachefriends.org/download.html
